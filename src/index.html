@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/common.css" rel="stylesheet" />
+    <link href="lib/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="lib/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="lib/animateCSS/animate.css" rel="stylesheet" />
+    <title>MECSOL</title>
+</head>
+
+<script src="lib/popper.js/umd/popper.js"></script>
+<script src="lib/bootstrap/js/bootstrap.js"></script>
+<script src="lib/jquery/jquery.js"></script>
+<script src="js/themeSwitcher.js"></script>
+<script src="js/index.js"></script>
+
+<body data-bs-theme="light" data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="70">
+    <nav class="navbar navbar-expand-lg py-3 sticky-top navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <strong>MECSOL.</strong>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#goals">Objetivos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#introduction">Introdução</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contents">Conteúdos</a>
+                    </li>
+                    <li class="nav-item mx-5 mt-2">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="SwitchTheme" />
+                            <label class="form-check-label" for="SwitchTheme">
+                                <i class="fa-regular fa-sun"></i>
+                            </label>
+                        </div>
+                    </li>
+                </ul>               
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero vh-100 d-flex align-items-center" id="home">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 mx-auto text-center">
+                    <h1 class="animate__animated animate__fadeIn display-4 text-white">Mecânica dos sólidos</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section id="goals">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md-8 mx-auto text-center">
+                    <h6 class="text-primary">OBJETIVOS</h6>
+                    <h1>Objetivos do projeto</h1>
+                    <p>O projeto "MECSOL." tem como foco introduzir a matéria do primeiro bimestre de 
+                        mecânica dos sólidos aos alunos de engenharia da FESA.</p>
+                </div>
+            </div>
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-4 col-sm-6">
+                    <div class="service card-effect bounceInUp text-dark">
+                        <div class="iconbox">
+                            <i class="fa-solid fa-shield-heart"></i>
+                        </div>
+                        <h5 class="mt-4 mb-2">Objetivo 1</h5>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil perspiciatis illo asperiores
+                            perferendis </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <div class="service card-effect text-dark">
+                        <div class="iconbox">
+                            <i class="fa-solid fa-comment-dots"></i>
+                        </div>
+                        <h5 class="mt-4 mb-2">Objetivo 2</h5>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil perspiciatis illo asperiores
+                            perferendis </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="row w-100 py-0" id="introduction">
+        <div class="col-lg-6 col-img"></div>
+        <div class="col-lg-6 py-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 offset-md-1">
+                        <h6 class="text-primary">INTRODUÇÃO</h6>
+                        <h1>Introdução a MECSOL.</h1>
+                        <p>A plataforma conta com material teórico e prático acerca da mecânica dos sólidos.
+                        </p>
+
+                        <div class="feature d-flex mt-5">
+                            <div class="iconbox me-3">
+                                <i class="fa-solid fa-circle-user"></i>
+                            </div>
+                            <div>
+                                <h5>Feature</h5>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil perspiciatis illo </p>
+                            </div>
+                        </div>
+                        <div class="feature d-flex">
+                            <div class="iconbox me-3">
+                                <i class="fa-solid fa-circle-down"></i>
+                            </div>
+                            <div>
+                                <h5>Feature</h5>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil perspiciatis illo </p>
+                            </div>
+                        </div>
+                        <div class="feature d-flex">
+                            <div class="iconbox me-3">
+                                <i class="fa-solid fa-circle-check"></i>
+                            </div>
+                            <div>
+                                <h5>Feature</h5>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil perspiciatis illo </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contents">
+        <div class="container-fluid">
+            <div class="row mb-5">
+                <div class="col-md-8 mx-auto text-center">
+                    <h6 class="text-primary">Conteúdos</h6>
+                    <h1>Tópicos da matéria</h1>
+                </div>
+            </div>
+            <div class="row g-3">
+                <div class="col-lg-4 col-sm-6">
+                    <div class="project" id="btnFundamentals">
+                        <img src="assets/fundamentals.jpg" alt="">
+                        <div class="overlay">
+                            <div>
+                                <h4 class="text-white">Fundamentos</h4>
+                                <h6 class="text-white">Fundamentos de comportamento mecânico dos materiais</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <div class="project" id="btnTractionCompression">
+                        <img src="assets/tractioncompression.jpg" alt="">
+                        <div class="overlay">
+                            <div>
+                                <h4 class="text-white">Tração e compressão</h4>
+                                <h6 class="text-white">Comportamento mecânico dos materiais aplicado a tração e compressão</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <div class="project" id="btnShear">
+                        <img src="assets/shear.jpg" alt="">
+                        <div class="overlay">
+                            <div>
+                                <h4 class="text-white">Cisalhamento</h4>
+                                <h6 class="text-white">Comportamento mecânico dos materiais aplicado ao cisalhamento</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-bottom py-3">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col text-white">
+                        <p class="mb-0" id="lblCurrentYear"></p>
+                    </div>
+                    <div class="col">
+                        <div class="social-icons">
+                            <a href="https://github.com/GabrielAB2411"><i class="fa-brands fa-github fa-xs"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
