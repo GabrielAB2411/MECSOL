@@ -2,10 +2,10 @@ var collapseFour = '#collapseFour';
 var collapseFourAccordionBody = '#collapseFour .accordion-body';
 
 var imagePaths = [
-    { name: 'Compression Circle', path: '../../assets/compressionCircle.png' },
-    { name: 'Compression Square', path: '../../assets/compressionSquare.png' },
-    { name: 'Traction Circle', path: '../../assets/tractionCircle.png' },
-    { name: 'Traction Square', path: '../../assets/tractionSquare.png' }
+    { name: 'Compression Circle', path: '../../assets/compressionCircle.png', type: 'Compression', shape: 'Circle' },
+    { name: 'Compression Square', path: '../../assets/compressionSquare.png', type: 'Compression', shape: 'Square' },
+    { name: 'Traction Circle', path: '../../assets/tractionCircle.png', type: 'Traction', shape: 'Circle' },
+    { name: 'Traction Square', path: '../../assets/tractionSquare.png', type: 'Traction', shape: 'Square' }
 ];
 
 $(document).ready(function(){
