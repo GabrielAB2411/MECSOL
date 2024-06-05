@@ -1,5 +1,15 @@
-var collapseFour = "#collapseFour";
-var collapseFourAccordionBody = "#collapseFour .accordion-body";
+let collapseFour = "#collapseFour";
+let collapseFourAccordionBody = "#collapseFour .accordion-body";
+let btnVerificar = "#btnVerificar";
+
+let square = "Square";
+let circle = "Circle";
+let compression = "Compression";
+let traction = "Traction";
+
+var randomImageType = "";
+var randomImageShape = "";
+var randomImagePath = "";
 
 var imagePaths = [
   {
@@ -38,8 +48,10 @@ $(document).ready(function () {
 });
 
 function handleExerciseAccordionOpen() {
-  var randomIndex = Math.floor(Math.random() * imagePaths.length);
-  var randomImagePath = imagePaths[randomIndex].path;
+  var randomIndex = Math.floor(Math.random() * imagePaths.length);  
+  randomImageType = imagePaths[randomIndex].type;
+  randomImageShape = imagePaths[randomIndex].shape;
+  randomImagePath = imagePaths[randomIndex].path;
   var img = document.createElement("img");
   img.src = randomImagePath;
   img.alt = "Random Image";
@@ -107,14 +119,37 @@ function handleExerciseAccordionOpen() {
             <label class="mx-2">[mm]</label>
         </div>
         <div class="d-flex justify-content-start">
-            <button type="button" class="btn btn-secondary">Verificar</button>
+            <button id="btnVerificar" type="button" class="btn btn-secondary">Verificar</button>
         </div>
     </div>`;
 
   accordionBody.appendChild(form);
+
+  $("#btnVerificar").on("click", function() {
+    calculateArea();
+    calculateSignal();
+  });
 }
 
 function handleExerciseAccordionClose() {
   var accordionBody = document.querySelector(collapseFourAccordionBody);
   accordionBody.innerHTML = "";
+}
+
+function calculateArea(){
+  if(randomImageShape == square){
+    //tratativa para calcular área de quadrado
+  }
+  else if(randomImageShape == circle){
+    //tratativa para calcular área de circulo
+  }
+}
+
+function calculateSignal(){
+  if(randomImageType == compression){
+    //tratativa para calcular os sinais (+/-)
+  }
+  else if(randomImageType == traction){
+    //tratativa para calcular os sinais (+/-)
+  }
 }
