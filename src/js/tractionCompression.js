@@ -11,6 +11,14 @@ var randomImageType = "";
 var randomImageShape = "";
 var randomImagePath = "";
 
+var valueA;
+var valueB;
+var valueC;
+var tractionFlow;
+var tractionLimit;
+var generateResilience;
+var vonMises;
+
 var imagePaths = [
   {
     name: "Compression Circle",
@@ -55,6 +63,14 @@ function handleExerciseAccordionOpen() {
   var img = document.createElement("img");
   img.src = randomImagePath;
   img.alt = "Random Image";
+
+  valueA = generateValueA();
+  valueB = generateValueB();
+  valueC = generateValueC();
+  tractionFlow = generateTractionFlow();
+  tractionLimit = generateTractionLimit();
+  resilience = generateResilience();
+  vonMises = 0,31;
 
   var accordionBody = document.querySelector(collapseFourAccordionBody);
 
@@ -121,13 +137,30 @@ function handleExerciseAccordionOpen() {
         <div class="d-flex justify-content-start">
             <button id="btnVerificar" type="button" class="btn btn-secondary">Verificar</button>
         </div>
+
+        <div>
+          <label>[A] = ${valueA} mm</label>
+        </div>
+        <div>
+          <label>[B] = ${valueB} mm</label>
+        </div>
+        <div>
+          <label>[C] = ${valueC} N</label>
+        </div>
+        <div>&sigma;<sub>&epsilon;</sub>: ${tractionFlow} MPa</div>
+        <div>&sigma;<sub>LRT</sub>: ${tractionLimit} MPa</div>
+        <div>
+          <label>Ur = ${resilience} MJ/M³</label>
+        </div>
+        <div>
+          <label>v = ${vonMises} MJ/M³</label>
+        </div>
     </div>`;
 
   accordionBody.appendChild(form);
 
   $("#btnVerificar").on("click", function() {
-    calculateArea();
-    calculateSignal();
+    validateResult();
   });
 }
 
@@ -137,12 +170,12 @@ function handleExerciseAccordionClose() {
 }
 
 function calculateArea(){
-  if(randomImageShape == square){
-    //tratativa para calcular área de quadrado
-  }
-  else if(randomImageShape == circle){
-    //tratativa para calcular área de circulo
-  }
+  return randomImageShape == circle ? (Math.PI * Math.pow(valueA, 2)) : Math.pow(valueA, 2);
+}
+
+function calculateTraction(area){
+  debugger;
+  return (valueC / area); 
 }
 
 function calculateSignal(){
@@ -152,4 +185,50 @@ function calculateSignal(){
   else if(randomImageType == traction){
     //tratativa para calcular os sinais (+/-)
   }
+}
+
+function generateValueA(){
+  var randomValue = Math.random();
+  var scaledValue = randomValue * (90 - 40) + 40;
+  var roundedValue = Math.round(scaledValue);
+  return roundedValue;
+}
+
+function generateValueB(){
+  var randomValue = Math.random();
+  var scaledValue = randomValue * (200 - 150) + 150;
+  var roundedValue = Math.round(scaledValue);
+  return roundedValue;
+}
+
+function generateValueC(){
+  var randomValue = Math.random();
+  var scaledValue = randomValue * (200000 - 100000) + 100000;
+  var roundedValue = Math.round(scaledValue);
+  return roundedValue;
+}
+
+function generateTractionFlow(){
+  var randomValue = Math.random();
+  var scaledValue = randomValue * (600 - 400) + 400;
+  var roundedValue = Math.round(scaledValue);
+  return roundedValue;
+}
+
+function generateTractionLimit(){
+  var randomValue = Math.random();
+  var scaledValue = randomValue * (600 - 400) + 400;
+  var roundedValue = Math.round(scaledValue);
+  return roundedValue;
+}
+
+function generateResilience(){
+  var randomValue = Math.random();
+  var scaledValue = randomValue * (3 - 1) + 1;
+  var roundedValue = Math.round(scaledValue);
+  return roundedValue;
+}
+
+function validateResult(){
+  
 }
