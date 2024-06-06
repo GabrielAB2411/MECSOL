@@ -2,10 +2,10 @@ let collapseFour = "#collapseFour";
 let collapseFourAccordionBody = "#collapseFour .accordion-body";
 let btnVerificar = "#btnVerificar";
 
-let square = "Square";
-let circle = "Circle";
-let compression = "Compression";
-let traction = "Traction";
+let _square = "Square";
+let _circle = "Circle";
+let _compression = "Compression";
+let _traction = "Traction";
 
 var randomImageType = "";
 var randomImageShape = "";
@@ -16,8 +16,11 @@ var valueB;
 var valueC;
 var tractionFlow;
 var tractionLimit;
+var traction;
 var generateResilience;
 var vonMises;
+var safetyFactor;
+var area;
 
 var imagePaths = [
   {
@@ -70,7 +73,9 @@ function handleExerciseAccordionOpen() {
   tractionFlow = generateTractionFlow();
   tractionLimit = generateTractionLimit();
   resilience = generateResilience();
-  vonMises = 0,31;
+  vonMises = 0.31;
+
+  safetyFactor = calculateSafetyFactor();
 
   var accordionBody = document.querySelector(collapseFourAccordionBody);
 
@@ -169,24 +174,6 @@ function handleExerciseAccordionClose() {
   accordionBody.innerHTML = "";
 }
 
-function calculateArea(){
-  return randomImageShape == circle ? (Math.PI * Math.pow(valueA, 2)) : Math.pow(valueA, 2);
-}
-
-function calculateTraction(area){
-  debugger;
-  return (valueC / area); 
-}
-
-function calculateSignal(){
-  if(randomImageType == compression){
-    //tratativa para calcular os sinais (+/-)
-  }
-  else if(randomImageType == traction){
-    //tratativa para calcular os sinais (+/-)
-  }
-}
-
 function generateValueA(){
   var randomValue = Math.random();
   var scaledValue = randomValue * (90 - 40) + 40;
@@ -210,14 +197,14 @@ function generateValueC(){
 
 function generateTractionFlow(){
   var randomValue = Math.random();
-  var scaledValue = randomValue * (600 - 400) + 400;
+  var scaledValue = randomValue * (599 - 400) + 400;
   var roundedValue = Math.round(scaledValue);
   return roundedValue;
 }
 
 function generateTractionLimit(){
   var randomValue = Math.random();
-  var scaledValue = randomValue * (600 - 400) + 400;
+  var scaledValue = randomValue * (800 - 600) + 600;
   var roundedValue = Math.round(scaledValue);
   return roundedValue;
 }
@@ -229,6 +216,35 @@ function generateResilience(){
   return roundedValue;
 }
 
-function validateResult(){
-  
+function calculateArea(){
+  return randomImageShape == _circle ? (Math.PI * Math.pow(valueA, 2)) : Math.pow(valueA, 2);
 }
+
+function calculateTraction(){
+  return (valueC / area); 
+}
+
+function calculateSignal(){
+  if(randomImageType == _compression){
+    //tratativa para calcular os sinais (+/-)
+  }
+  else if(randomImageType == _traction){
+    //tratativa para calcular os sinais (+/-)
+  }
+}
+
+function calculateSafetyFactor(){
+  return (tractionFlow / traction);
+}
+
+function validateResult(){
+  area = calculateArea();
+  traction = calculateTraction();
+  safetyFactor = calculateSafetyFactor();
+
+  console.log(`Área: ${area}`);
+  console.log(`Tensão: ${traction}`);
+  console.log(`S: ${safetyFactor}`);
+}
+
+
