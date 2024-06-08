@@ -163,8 +163,8 @@ function handleExerciseAccordionOpen() {
     </div>`;
 
   accordionBody.appendChild(form);
-
-  $("#btnVerificar").on("click", function() {
+   
+  $(btnVerificar).on("click", function() {
     validateResult();
   });
 }
@@ -246,5 +246,3 @@ function validateResult(){
   console.log(`Tensão: ${traction}`);
   console.log(`S: ${safetyFactor}`);
 }
-
-
