@@ -7,10 +7,13 @@ let _circle = "Circle";
 let _compression = "Compression";
 let _traction = "Traction";
 
+var img = "";
+var randomIndex = "";
 var randomImageType = "";
 var randomImageShape = "";
 var randomImagePath = "";
 
+var signal;
 var valueA;
 var valueB;
 var valueC;
@@ -21,6 +24,12 @@ var generateResilience;
 var vonMises;
 var safetyFactor;
 var area;
+var flowDeformation;
+var elasticModulus;
+var longitudinalDeformation;
+var transverseDeformation;
+var lengthVariation;
+var widthVariation;
 
 var imagePaths = [
   {
@@ -59,31 +68,39 @@ $(document).ready(function () {
 });
 
 function handleExerciseAccordionOpen() {
-  var randomIndex = Math.floor(Math.random() * imagePaths.length);  
-  randomImageType = imagePaths[randomIndex].type;
-  randomImageShape = imagePaths[randomIndex].shape;
-  randomImagePath = imagePaths[randomIndex].path;
-  var img = document.createElement("img");
-  img.src = randomImagePath;
-  img.alt = "Random Image";
-
-  valueA = generateValueA();
-  valueB = generateValueB();
-  valueC = generateValueC();
-  tractionFlow = generateTractionFlow();
-  tractionLimit = generateTractionLimit();
-  resilience = generateResilience();
-  vonMises = 0.31;
-
-  safetyFactor = calculateSafetyFactor();
-
+  randomImage();
+  createCase();
   var accordionBody = document.querySelector(collapseFourAccordionBody);
 
   accordionBody.innerHTML = "";
   accordionBody.appendChild(img);
 
   var form = document.createElement("form");
-  form.innerHTML = `
+  form.innerHTML = createForm();
+  accordionBody.appendChild(form);
+   
+  $(btnVerificar).on("click", function() {
+    validateResult();
+  });
+}
+
+function randomImage(){
+  randomIndex = Math.floor(Math.random() * imagePaths.length);  
+  randomImageType = imagePaths[randomIndex].type;
+  randomImageShape = imagePaths[randomIndex].shape;
+  randomImagePath = imagePaths[randomIndex].path;
+  img = document.createElement("img");
+  img.src = randomImagePath;
+  img.alt = "Random Image";
+}
+
+function handleExerciseAccordionClose() {
+  var accordionBody = document.querySelector(collapseFourAccordionBody);
+  accordionBody.innerHTML = "";
+}
+
+function createForm(){
+  return `
     <div class="container mt-4 mb-4">
         <div class="mb-3 d-flex align-items-center">
             <label for="tensao" class="form-label me-3">Tensão da estrutura (σ) (3 casas)</label>
@@ -158,91 +175,100 @@ function handleExerciseAccordionOpen() {
           <label>Ur = ${resilience} MJ/M³</label>
         </div>
         <div>
-          <label>v = ${vonMises} MJ/M³</label>
+          <label>v = ${vonMises}</label>
         </div>
     </div>`;
-
-  accordionBody.appendChild(form);
-   
-  $(btnVerificar).on("click", function() {
-    validateResult();
-  });
 }
 
-function handleExerciseAccordionClose() {
-  var accordionBody = document.querySelector(collapseFourAccordionBody);
-  accordionBody.innerHTML = "";
+function createCase(){
+  //testes de cenários:
+  // valueA = 85;
+  // valueB = 608;
+  // valueC = 200000;
+  // tractionFlow = 206;
+  // tractionLimit = 440;
+  // resilience = 0.75;
+  
+  valueA = generateValue(40, 90);
+  valueB = generateValue(150, 200);
+  valueC = generateValue(100000, 200000);
+  tractionFlow = generateValue(400, 599);
+  tractionLimit = generateValue(600, 800);
+  resilience = generateValue(1, 3);
+  vonMises = 0.33;
 }
 
-function generateValueA(){
+function generateValue(min, max){
   var randomValue = Math.random();
-  var scaledValue = randomValue * (90 - 40) + 40;
-  var roundedValue = Math.round(scaledValue);
-  return roundedValue;
-}
-
-function generateValueB(){
-  var randomValue = Math.random();
-  var scaledValue = randomValue * (200 - 150) + 150;
-  var roundedValue = Math.round(scaledValue);
-  return roundedValue;
-}
-
-function generateValueC(){
-  var randomValue = Math.random();
-  var scaledValue = randomValue * (200000 - 100000) + 100000;
-  var roundedValue = Math.round(scaledValue);
-  return roundedValue;
-}
-
-function generateTractionFlow(){
-  var randomValue = Math.random();
-  var scaledValue = randomValue * (599 - 400) + 400;
-  var roundedValue = Math.round(scaledValue);
-  return roundedValue;
-}
-
-function generateTractionLimit(){
-  var randomValue = Math.random();
-  var scaledValue = randomValue * (800 - 600) + 600;
-  var roundedValue = Math.round(scaledValue);
-  return roundedValue;
-}
-
-function generateResilience(){
-  var randomValue = Math.random();
-  var scaledValue = randomValue * (3 - 1) + 1;
+  var scaledValue = randomValue * (max - min) + min;
   var roundedValue = Math.round(scaledValue);
   return roundedValue;
 }
 
 function calculateArea(){
-  return randomImageShape == _circle ? (Math.PI * Math.pow(valueA, 2)) : Math.pow(valueA, 2);
+  return randomImageShape == _circle ? (Math.PI * Math.pow((valueA/2), 2)) : Math.pow(valueA, 2);
 }
 
 function calculateTraction(){
-  return (valueC / area); 
+  return (valueC / area).toFixed(3);
 }
 
 function calculateSignal(){
-  if(randomImageType == _compression){
-    //tratativa para calcular os sinais (+/-)
-  }
-  else if(randomImageType == _traction){
-    //tratativa para calcular os sinais (+/-)
-  }
+  return ((randomImageType == _compression) ? -1 : 1);
 }
 
 function calculateSafetyFactor(){
-  return (tractionFlow / traction);
+  return (tractionFlow / traction).toFixed(2);
+}
+
+function calculateFlowDeformation(){
+  return ((((2 * resilience) / tractionFlow).toFixed(5)));
+}
+
+function calculateElasticModulus(){
+  return ((Math.abs(tractionFlow) / Math.abs(flowDeformation))/1000).toFixed(3);
+}
+
+function calculateLongitudinalDeformation(){
+  return (((traction / elasticModulus) / 1000).toFixed(5) * signal);  
+}
+
+function calculateTransverseDeformation() {
+  return ((longitudinalDeformation * vonMises) * (-1)).toFixed(5);
+}
+
+function calculateLengthVariation() {
+  return (traction * valueB * signal / elasticModulus / 1000).toFixed(3);
+}
+
+function calculateWidthVariation() {
+  return (transverseDeformation * valueA).toFixed(5);
 }
 
 function validateResult(){
+  safetyFactor = calculateSafetyFactor();
+  signal = calculateSignal();
   area = calculateArea();
   traction = calculateTraction();
   safetyFactor = calculateSafetyFactor();
+  flowDeformation = calculateFlowDeformation();
+  elasticModulus = calculateElasticModulus();
+  longitudinalDeformation = calculateLongitudinalDeformation();
+  transverseDeformation = calculateTransverseDeformation();
+  lengthVariation = calculateLengthVariation();
+  widthVariation = calculateWidthVariation();
 
+  test();
+}
+
+function test(){
   console.log(`Área: ${area}`);
   console.log(`Tensão: ${traction}`);
   console.log(`S: ${safetyFactor}`);
+  console.log(`Flow deformation: ${flowDeformation}`);
+  console.log(`Elastic Modulus: ${elasticModulus}`);
+  console.log(`Longitudinal Deformation: ${longitudinalDeformation}`);
+  console.log(`Transverse Deformation: ${transverseDeformation}`);
+  console.log(`Length Variation: ${lengthVariation}`);
+  console.log(`Width Variation: ${widthVariation}`);
 }
