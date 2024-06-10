@@ -90,5 +90,9 @@ $(document).ready(function () {
 
   $("[data-bs-theme]").each(function () {
     $(this).attr("data-bs-theme", currentTheme);
+    if (currentTheme === 'dark') 
+      document.getElementById('sweetalert-theme').href = '../../lib/sweetalert2/sweetalert2-dark.css';
+    else 
+      document.getElementById('sweetalert-theme').href = '../../lib/sweetalert2/sweetalert2.css';
   });
 });
