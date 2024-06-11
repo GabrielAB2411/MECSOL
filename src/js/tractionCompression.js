@@ -150,54 +150,54 @@ function createForm(){
           </ul>
         </div>
         <div class="mb-3 d-flex align-items-center">
-            <label for="tensao" class="form-label me-3" data-toggle="tooltip" data-placement="top" title="Tooltip on top"><b>a)</b> Tensão da estrutura (σ)</label>
+            <label class="form-label me-3" style="cursor: pointer;" data-toggle="tooltip" data-placement="top" title="Tooltip on top"><b>a)</b> Tensão da estrutura (σ)</label>
             <div style="width: 120px;">
                 <input type="number" class="form-control" id="tensao" style="font-size: smaller;">
             </div>
             <label class="mx-2">[MPa]</label>
         </div>
         <div class="mb-3 d-flex align-items-center">
-            <label for="coeficiente" class="form-label me-3" data-toggle="tooltip" data-placement="top" title="Tooltip on top"><b>b)</b> Coeficiente de Segurança (S)</label>
+            <label class="form-label me-3" style="cursor: pointer;" data-toggle="tooltip" data-placement="top" title="Tooltip on top"><b>b)</b> Coeficiente de Segurança (S)</label>
             <div style="width: 120px;">
                 <input type="number" class="form-control" id="coeficiente" style="font-size: smaller;">
             </div>
         </div>
         <div class="mb-3 d-flex align-items-center">
-            <label for="deformacaoEscoamento" class="form-label me-3" data-toggle="tooltip" data-placement="top" title="Tooltip on top"><b>c)</b> Deformação na Tensão de escoamento (εe)</label>
+            <label class="form-label me-3" style="cursor: pointer;" data-toggle="tooltip" data-placement="top" title="Tooltip on top"><b>c)</b> Deformação na Tensão de escoamento (εe)</label>
             <div style="width: 120px;">
                 <input type="number" class="form-control" id="deformacaoEscoamento" style="font-size: smaller;">
             </div>
         </div>
         <div class="mb-3 d-flex align-items-center">
-            <label for="moduloElasticidade" class="form-label me-3" data-toggle="tooltip" data-placement="top" title="Tooltip on top"><b>d)</b> Módulo de Elasticidade (E)</label>
+            <label class="form-label me-3" style="cursor: pointer;" data-toggle="tooltip" data-placement="top" title="Tooltip on top"><b>d)</b> Módulo de Elasticidade (E)</label>
             <div style="width: 120px;">
                 <input type="number" class="form-control" id="moduloElasticidade" style="font-size: smaller;">
             </div>
             <label class="mx-2">[GPa]</label>
         </div>
         <div class="mb-3 d-flex align-items-center">
-            <label for="deformacaoLongitudinal" class="form-label me-3" data-toggle="tooltip" data-placement="top" title="Tooltip on top"><b>e)</b> Deformação Longitudinal (ε)</label>
+            <label class="form-label me-3" style="cursor: pointer;" data-toggle="tooltip" data-placement="top" title="Tooltip on top"><b>e)</b> Deformação Longitudinal (ε)</label>
             <div style="width: 120px;">
                 <input type="number" class="form-control" id="deformacaoLongitudinal" style="font-size: smaller;">
             </div>
             <label class="mx-2">[mm/mm]</label>
         </div>
         <div class="mb-3 d-flex align-items-center">
-            <label for="deformacaoTransversal" class="form-label me-3" data-toggle="tooltip" data-placement="top" title="Tooltip on top"><b>f)</b> Deformação Transversal (εt)</label>
+            <label class="form-label me-3" style="cursor: pointer;" data-toggle="tooltip" data-placement="top" title="Tooltip on top"><b>f)</b> Deformação Transversal (εt)</label>
             <div style="width: 120px;">
                 <input type="number" class="form-control" id="deformacaoTransversal" style="font-size: smaller;">
             </div>
             <label class="mx-2">[mm/mm]</label>
         </div>
         <div class="mb-3 d-flex align-items-center">
-            <label for="variacaoComprimento" class="form-label me-3" data-toggle="tooltip" data-placement="top" title="Tooltip on top"><b>g)</b> Variação de Comprimento (Δl)</label>
+            <label class="form-label me-3" style="cursor: pointer;" data-toggle="tooltip" data-placement="top" title="Tooltip on top"><b>g)</b> Variação de Comprimento (Δl)</label>
             <div style="width: 120px;">
                 <input type="number" class="form-control" id="variacaoComprimento" style="font-size: smaller;">
             </div>
             <label class="mx-2">[mm]</label>
         </div>
         <div class="mb-5 d-flex align-items-center">
-            <label for="variacaoLargura" class="form-label me-3" data-toggle="tooltip" data-placement="top" title="Tooltip on top"><b>h)</b> Variação de Largura (Δw)</label>
+            <label class="form-label me-3" style="cursor: pointer;" data-toggle="tooltip" data-placement="top" title="Tooltip on top"><b>h)</b> Variação de Largura (Δw)</label>
             <div style="width: 120px;">
                 <input type="number" class="form-control" id="variacaoLargura" style="font-size: smaller;">
             </div>
