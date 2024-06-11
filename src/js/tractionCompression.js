@@ -65,7 +65,23 @@ var imagePaths = [
 $(document).ready(function () {
   handleExercise();
 
-  $('[data-toggle="tooltip"]').tooltip();
+  $('[data-toggle="tooltip"]').each(function () {
+    const $this = $(this);
+    const tooltip = new bootstrap.Tooltip($this[0]);
+
+    let pressTimer;
+
+    $this.on('touchstart', function () {
+      pressTimer = setTimeout(function () {
+        tooltip.show();
+      }, 500); 
+    });
+
+    $this.on('touchend touchmove', function () {
+      clearTimeout(pressTimer);
+      tooltip.hide();
+    });
+  });
 });
 
 function handleExercise() {
