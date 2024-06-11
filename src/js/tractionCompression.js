@@ -1,5 +1,6 @@
 let collapseFour = '#collapseFour';
 let collapseFourAccordionBody = '#collapseFour .accordion-body';
+let btnShowRightAnswers = '#btnShowRightAnswers';
 let btnVerify = '#btnVerify';
 let btnRandomize = '#btnRandomize';
 
@@ -63,6 +64,8 @@ var imagePaths = [
 
 $(document).ready(function () {
   handleExercise();
+
+  $('[data-toggle="tooltip"]').tooltip();
 });
 
 function handleExercise() {
@@ -80,6 +83,10 @@ function handleExercise() {
 
   createResults();
    
+  $(btnShowRightAnswers).on('click', function() {
+    showRightAnswers();
+  });
+
   $(btnVerify).on('click', function() {
     validateResults();
   });
@@ -121,54 +128,54 @@ function createForm(){
           </ul>
         </div>
         <div class="mb-3 d-flex align-items-center">
-            <label for="tensao" class="form-label me-3"><b>a)</b> Tensão da estrutura (σ) (3 casas)</label>
+            <label for="tensao" class="form-label me-3" data-toggle="tooltip" data-placement="top" title="Tooltip on top"><b>a)</b> Tensão da estrutura (σ)</label>
             <div style="width: 120px;">
                 <input type="number" class="form-control" id="tensao" style="font-size: smaller;">
             </div>
             <label class="mx-2">[MPa]</label>
         </div>
         <div class="mb-3 d-flex align-items-center">
-            <label for="coeficiente" class="form-label me-3"><b>b)</b> Coeficiente de Segurança (S) (2 casas)</label>
+            <label for="coeficiente" class="form-label me-3" data-toggle="tooltip" data-placement="top" title="Tooltip on top"><b>b)</b> Coeficiente de Segurança (S)</label>
             <div style="width: 120px;">
                 <input type="number" class="form-control" id="coeficiente" style="font-size: smaller;">
             </div>
         </div>
         <div class="mb-3 d-flex align-items-center">
-            <label for="deformacaoEscoamento" class="form-label me-3"><b>c)</b> Deformação na Tensão de escoamento (εe) (5 casas)</label>
+            <label for="deformacaoEscoamento" class="form-label me-3" data-toggle="tooltip" data-placement="top" title="Tooltip on top"><b>c)</b> Deformação na Tensão de escoamento (εe)</label>
             <div style="width: 120px;">
                 <input type="number" class="form-control" id="deformacaoEscoamento" style="font-size: smaller;">
             </div>
         </div>
         <div class="mb-3 d-flex align-items-center">
-            <label for="moduloElasticidade" class="form-label me-3"><b>d)</b> Módulo de Elasticidade (E) (3 casas)</label>
+            <label for="moduloElasticidade" class="form-label me-3" data-toggle="tooltip" data-placement="top" title="Tooltip on top"><b>d)</b> Módulo de Elasticidade (E)</label>
             <div style="width: 120px;">
                 <input type="number" class="form-control" id="moduloElasticidade" style="font-size: smaller;">
             </div>
             <label class="mx-2">[GPa]</label>
         </div>
         <div class="mb-3 d-flex align-items-center">
-            <label for="deformacaoLongitudinal" class="form-label me-3"><b>e)</b> Deformação Longitudinal (ε) (5 casas)</label>
+            <label for="deformacaoLongitudinal" class="form-label me-3" data-toggle="tooltip" data-placement="top" title="Tooltip on top"><b>e)</b> Deformação Longitudinal (ε)</label>
             <div style="width: 120px;">
                 <input type="number" class="form-control" id="deformacaoLongitudinal" style="font-size: smaller;">
             </div>
             <label class="mx-2">[mm/mm]</label>
         </div>
         <div class="mb-3 d-flex align-items-center">
-            <label for="deformacaoTransversal" class="form-label me-3"><b>f)</b> Deformação Transversal (εt) (5 casas)</label>
+            <label for="deformacaoTransversal" class="form-label me-3" data-toggle="tooltip" data-placement="top" title="Tooltip on top"><b>f)</b> Deformação Transversal (εt)</label>
             <div style="width: 120px;">
                 <input type="number" class="form-control" id="deformacaoTransversal" style="font-size: smaller;">
             </div>
             <label class="mx-2">[mm/mm]</label>
         </div>
         <div class="mb-3 d-flex align-items-center">
-            <label for="variacaoComprimento" class="form-label me-3"><b>g)</b> Variação de Comprimento (Δl) (3 casas)</label>
+            <label for="variacaoComprimento" class="form-label me-3" data-toggle="tooltip" data-placement="top" title="Tooltip on top"><b>g)</b> Variação de Comprimento (Δl)</label>
             <div style="width: 120px;">
                 <input type="number" class="form-control" id="variacaoComprimento" style="font-size: smaller;">
             </div>
             <label class="mx-2">[mm]</label>
         </div>
         <div class="mb-5 d-flex align-items-center">
-            <label for="variacaoLargura" class="form-label me-3"><b>h)</b> Variação de Largura (Δw) (5 casas)</label>
+            <label for="variacaoLargura" class="form-label me-3" data-toggle="tooltip" data-placement="top" title="Tooltip on top"><b>h)</b> Variação de Largura (Δw)</label>
             <div style="width: 120px;">
                 <input type="number" class="form-control" id="variacaoLargura" style="font-size: smaller;">
             </div>
@@ -176,6 +183,9 @@ function createForm(){
         </div>
         <hr>
         <div class="d-flex justify-content-end mt-3">
+            <button id="btnShowRightAnswers" type="button" class="btn btn-outline-secondary" title="Mostrar respostas">
+              <i class="fa-solid fa-eye"></i>
+            </button> 
             <button id="btnRandomize" type="button" class="btn btn-outline-info mx-2" title="Gerar um novo exercício">
               <i class="fa-solid fa-arrows-rotate"></i>
             </button> 
@@ -185,14 +195,6 @@ function createForm(){
 }
 
 function createCase(){
-  //testes de cenários:
-  // valueA = 85;
-  // valueB = 608;
-  // valueC = 200000;
-  // tractionFlow = 206;
-  // tractionLimit = 440;
-  // resilience = 0.75;
-  
   valueA = generateValue(40, 90);
   valueB = generateValue(150, 200);
   valueC = generateValue(100000, 200000);
@@ -261,8 +263,6 @@ function createResults(){
   transverseDeformation = calculateTransverseDeformation();
   lengthVariation = calculateLengthVariation();
   widthVariation = calculateWidthVariation();
-
-  test();
 }
 
 function showMessage() {
@@ -337,13 +337,13 @@ function validateResults() {
   showMessage();
 }
 
-function test(){
-  console.log(`Tensão: ${traction}`);
-  console.log(`S: ${safetyFactor}`);
-  console.log(`Flow deformation: ${flowDeformation}`);
-  console.log(`Elastic Modulus: ${elasticModulus}`);
-  console.log(`Longitudinal Deformation: ${longitudinalDeformation}`);
-  console.log(`Transverse Deformation: ${transverseDeformation}`);
-  console.log(`Length Variation: ${lengthVariation}`);
-  console.log(`Width Variation: ${widthVariation}`);
+function showRightAnswers() {
+  $('#tensao').val(traction);
+  $('#coeficiente').val(safetyFactor);
+  $('#deformacaoEscoamento').val(flowDeformation);
+  $('#moduloElasticidade').val(elasticModulus);
+  $('#deformacaoLongitudinal').val(longitudinalDeformation);
+  $('#deformacaoTransversal').val(transverseDeformation);
+  $('#variacaoComprimento').val(lengthVariation);
+  $('#variacaoLargura').val(widthVariation);
 }
