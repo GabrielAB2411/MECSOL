@@ -1,6 +1,7 @@
 let collapseFour = '#collapseFour';
 let collapseFourAccordionBody = '#collapseFour .accordion-body';
 let btnVerify = '#btnVerify';
+let btnRandomize = '#btnRandomize';
 
 let _square = 'Square';
 let _circle = 'Circle';
@@ -23,7 +24,7 @@ var tractionFlow;
 var tractionLimit;
 var traction;
 var generateResilience;
-var vonMises;
+var poisson;
 var safetyFactor;
 var area;
 var flowDeformation;
@@ -70,6 +71,7 @@ function handleExercise() {
   var accordionBody = document.querySelector(collapseFourAccordionBody);
 
   accordionBody.innerHTML = '';
+  img.classList.add('mt-3');
   accordionBody.appendChild(img);
 
   var form = document.createElement('form');
@@ -81,6 +83,10 @@ function handleExercise() {
   $(btnVerify).on('click', function() {
     validateResults();
   });
+
+  $(btnRandomize).on('click', function() {
+    handleExercise();
+  });
 }
 
 function randomImage(){
@@ -91,6 +97,7 @@ function randomImage(){
   img = document.createElement('img');
   img.src = randomImagePath;
   img.alt = 'Image';
+  img.classList.add('rounded');
 }
 
 function handleExerciseAccordionClose() {
@@ -100,66 +107,68 @@ function handleExerciseAccordionClose() {
 
 function createForm(){
   return `
-    <div class="container mt-4 mb-4">
-        <div class="d-flex flex-column align-items-start mb-3">
-          <h5>Calcule o que se pede com base nos dados abaixo:</h5>
-          <label><b>[A]</b> = ${valueA} mm</label>
-          <label><b>[B]</b> = ${valueB} mm</label>
-          <label><b>[C]</b> = ${valueC} N</label>
-          <div><b>&sigma;<sub>&epsilon;</sub> = </b> ${tractionFlow} MPa</div>
-          <div><b>&sigma;<sub>LRT</sub> = </b> ${tractionLimit} MPa</div>
-          <label><b>Ur</b> = ${resilience} MJ/M³</label>
-          <label><b>v</b> = ${vonMises}</label>
-          </div>
+    <div class="container mt-4">
+        <div class="d-flex flex-column align-items-start mb-4">
+          <h4 class="mb-3"><b>Calcule o que se pede com base nos dados abaixo:</b></h4>
+          <ul>
+            <li><label><b>[A]</b> = ${valueA} mm</label></li>
+            <li><label><b>[B]</b> = ${valueB} mm</label></li>
+            <li><label><b>[C]</b> = ${valueC} N</label></li>
+            <li><div><b>&sigma;<sub>&epsilon;</sub> = </b> ${tractionFlow} MPa</div></li>
+            <li><div><b>&sigma;<sub>LRT</sub> = </b> ${tractionLimit} MPa</div></li>
+            <li><label><b>Ur</b> = ${resilience} MJ/M³</label></li>
+            <li><label><b>v</b> = ${poisson}</label></li>
+          </ul>
+        </div>
         <div class="mb-3 d-flex align-items-center">
-            <label for="tensao" class="form-label me-3">Tensão da estrutura (σ) (3 casas)</label>
+            <label for="tensao" class="form-label me-3"><b>a)</b> Tensão da estrutura (σ) (3 casas)</label>
             <div style="width: 120px;">
                 <input type="number" class="form-control" id="tensao" style="font-size: smaller;">
             </div>
             <label class="mx-2">[MPa]</label>
         </div>
         <div class="mb-3 d-flex align-items-center">
-            <label for="coeficiente" class="form-label me-3">Coeficiente de Segurança (S) (2 casas)</label>
+            <label for="coeficiente" class="form-label me-3"><b>b)</b> Coeficiente de Segurança (S) (2 casas)</label>
             <div style="width: 120px;">
                 <input type="number" class="form-control" id="coeficiente" style="font-size: smaller;">
             </div>
         </div>
         <div class="mb-3 d-flex align-items-center">
-            <label for="deformacaoEscoamento" class="form-label me-3">Deformação na Tensão de escoamento (εe) (5 casas)</label>
+            <label for="deformacaoEscoamento" class="form-label me-3"><b>c)</b> Deformação na Tensão de escoamento (εe) (5 casas)</label>
             <div style="width: 120px;">
                 <input type="number" class="form-control" id="deformacaoEscoamento" style="font-size: smaller;">
             </div>
         </div>
         <div class="mb-3 d-flex align-items-center">
-            <label for="moduloElasticidade" class="form-label me-3">Módulo de Elasticidade (E) (3 casas)</label>
+            <label for="moduloElasticidade" class="form-label me-3"><b>d)</b> Módulo de Elasticidade (E) (3 casas)</label>
             <div style="width: 120px;">
                 <input type="number" class="form-control" id="moduloElasticidade" style="font-size: smaller;">
             </div>
             <label class="mx-2">[GPa]</label>
         </div>
         <div class="mb-3 d-flex align-items-center">
-            <label for="deformacaoLongitudinal" class="form-label me-3">Deformação Longitudinal (ε) (5 casas)</label>
+            <label for="deformacaoLongitudinal" class="form-label me-3"><b>e)</b> Deformação Longitudinal (ε) (5 casas)</label>
             <div style="width: 120px;">
                 <input type="number" class="form-control" id="deformacaoLongitudinal" style="font-size: smaller;">
             </div>
             <label class="mx-2">[mm/mm]</label>
         </div>
         <div class="mb-3 d-flex align-items-center">
-            <label for="deformacaoTransversal" class="form-label me-3">Deformação Transversal (εt) (5 casas)</label>
+            <label for="deformacaoTransversal" class="form-label me-3"><b>f)</b> Deformação Transversal (εt) (5 casas)</label>
             <div style="width: 120px;">
                 <input type="number" class="form-control" id="deformacaoTransversal" style="font-size: smaller;">
             </div>
             <label class="mx-2">[mm/mm]</label>
         </div>
         <div class="mb-3 d-flex align-items-center">
-            <label for="variacaoComprimento" class="form-label me-3">Variação de Comprimento (Δl) (3 casas)</label>
+            <label for="variacaoComprimento" class="form-label me-3"><b>g)</b> Variação de Comprimento (Δl) (3 casas)</label>
             <div style="width: 120px;">
                 <input type="number" class="form-control" id="variacaoComprimento" style="font-size: smaller;">
             </div>
             <label class="mx-2">[mm]</label>
         </div>
-        <div class="mb-3 d-flex align-items-center">
-            <label for="variacaoLargura" class="form-label me-3">Variação de Largura (Δw) (5 casas)</label>
+        <div class="mb-5 d-flex align-items-center">
+            <label for="variacaoLargura" class="form-label me-3"><b>h)</b> Variação de Largura (Δw) (5 casas)</label>
             <div style="width: 120px;">
                 <input type="number" class="form-control" id="variacaoLargura" style="font-size: smaller;">
             </div>
@@ -167,6 +176,9 @@ function createForm(){
         </div>
         <hr>
         <div class="d-flex justify-content-end mt-3">
+            <button id="btnRandomize" type="button" class="btn btn-outline-info mx-2" title="Gerar um novo exercício">
+              <i class="fa-solid fa-arrows-rotate"></i>
+            </button> 
             <button id="btnVerify" type="button" class="btn btn-outline-success">Verificar</button>
         </div>
     </div>`;
@@ -187,7 +199,7 @@ function createCase(){
   tractionFlow = generateValue(400, 599);
   tractionLimit = generateValue(600, 800);
   resilience = generateValue(1, 3);
-  vonMises = 0.33;
+  poisson = 0.33;
 }
 
 function generateValue(min, max){
@@ -226,7 +238,7 @@ function calculateLongitudinalDeformation(){
 }
 
 function calculateTransverseDeformation() {
-  return ((longitudinalDeformation * vonMises) * (-1)).toFixed(5);
+  return ((longitudinalDeformation * poisson) * (-1)).toFixed(5);
 }
 
 function calculateLengthVariation() {
@@ -257,26 +269,33 @@ function showMessage() {
   const percentage = (validResultsCount / totalResultsCount) * 100;
 
   var alertIcon;
+  var alertTitle;
 
   switch (percentage){
     case 0:
       alertIcon = 'error';
+      alertTitle = 'Estude um pouco mais';
       break;
 
     case 100:
       alertIcon = 'success';
+      alertTitle = 'Parabéns!';
       break;
 
     default:
       alertIcon = 'warning';
+      alertTitle = 'Você está indo bem';
       break;
   }
 
   Swal.fire({
-    title: 'Resultados',
+    title: alertTitle,
     text: `Porcentagem de acertos: ${percentage.toFixed(2)}%`,
     icon: alertIcon,
-    confirmButtonText: 'OK'
+    customClass: {
+      title: 'text-center',
+      htmlContainer: 'text-center'
+    }
   });
 
   totalResultsCount = 0;
