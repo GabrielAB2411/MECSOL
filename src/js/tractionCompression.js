@@ -93,6 +93,12 @@ function handleExercise() {
 
   $(btnRandomize).on('click', function() {
     handleExercise();
+
+    var targetOffset = $('#headingFour').offset().top;
+
+    $('html, body').animate({
+      scrollTop: targetOffset 
+    }, 200); 
   });
 }
 
