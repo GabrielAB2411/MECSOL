@@ -1,21 +1,21 @@
-let collapseFour = '#collapseFour';
-let collapseFourAccordionBody = '#collapseFour .accordion-body';
-let btnShowRightAnswers = '#btnShowRightAnswers';
-let btnVerify = '#btnVerify';
-let btnRandomize = '#btnRandomize';
+let collapseFour = "#collapseFour";
+let collapseFourAccordionBody = "#collapseFour .accordion-body";
+let btnShowRightAnswers = "#btnShowRightAnswers";
+let btnVerify = "#btnVerify";
+let btnRandomize = "#btnRandomize";
 
-let _square = 'Square';
-let _circle = 'Circle';
-let _compression = 'Compression';
-let _traction = 'Traction';
+let _square = "Square";
+let _circle = "Circle";
+let _compression = "Compression";
+let _traction = "Traction";
 let validResultsCount = 0;
 let totalResultsCount = 0;
 
-var img = '';
-var randomIndex = '';
-var randomImageType = '';
-var randomImageShape = '';
-var randomImagePath = '';
+var img = "";
+var randomIndex = "";
+var randomImageType = "";
+var randomImageShape = "";
+var randomImagePath = "";
 
 var signal;
 var valueA;
@@ -37,28 +37,28 @@ var widthVariation;
 
 var imagePaths = [
   {
-    name: 'Compression Circle',
-    path: '../../assets/compressionCircle.png',
-    type: 'Compression',
-    shape: 'Circle',
+    name: "Compression Circle",
+    path: "../../assets/compressionCircle.png",
+    type: "Compression",
+    shape: "Circle",
   },
   {
-    name: 'Compression Square',
-    path: '../../assets/compressionSquare.png',
-    type: 'Compression',
-    shape: 'Square',
+    name: "Compression Square",
+    path: "../../assets/compressionSquare.png",
+    type: "Compression",
+    shape: "Square",
   },
   {
-    name: 'Traction Circle',
-    path: '../../assets/tractionCircle.png',
-    type: 'Traction',
-    shape: 'Circle',
+    name: "Traction Circle",
+    path: "../../assets/tractionCircle.png",
+    type: "Traction",
+    shape: "Circle",
   },
   {
-    name: 'Traction Square',
-    path: '../../assets/tractionSquare.png',
-    type: 'Traction',
-    shape: 'Square',
+    name: "Traction Square",
+    path: "../../assets/tractionSquare.png",
+    type: "Traction",
+    shape: "Square",
   },
 ];
 
@@ -71,19 +71,19 @@ $(document).ready(function () {
 
     let pressTimer;
 
-    $this.on('touchstart', function () {
+    $this.on("touchstart", function () {
       pressTimer = setTimeout(function () {
         tooltip.show();
-      }, 500); 
+      }, 500);
     });
 
-    $this.on('touchend touchmove', function () {
+    $this.on("touchend touchmove", function () {
       clearTimeout(pressTimer);
       tooltip.hide();
     });
   });
 
-  $('#lblCurrentYear').text(`© ${new Date().getFullYear().toString()}`);
+  $("#lblCurrentYear").text(`© ${new Date().getFullYear().toString()}`);
 });
 
 function handleExercise() {
@@ -91,72 +91,76 @@ function handleExercise() {
   createCase();
   var accordionBody = document.querySelector(collapseFourAccordionBody);
 
-  accordionBody.innerHTML = '';
-  img.classList.add('mt-3');
+  accordionBody.innerHTML = "";
+  img.classList.add("mt-3");
   accordionBody.appendChild(img);
 
-  var form = document.createElement('form');
+  var form = document.createElement("form");
   form.innerHTML = createForm();
   accordionBody.appendChild(form);
 
   createResults();
-   
-  $(btnShowRightAnswers).on('click', function() {
+
+  $(btnShowRightAnswers).on("click", function () {
     showRightAnswers();
   });
 
-  $(btnVerify).on('click', function() {
+  $(btnVerify).on("click", function () {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: "btn btn-outline-success mx-2",
-        cancelButton: "btn btn-outline-danger"
+        cancelButton: "btn btn-outline-danger",
       },
-      buttonsStyling: false
+      buttonsStyling: false,
     });
-    swalWithBootstrapButtons.fire({
-      title: "Você tem certeza?",
-      icon: "question",
-      showCancelButton: true,
-      confirmButtonText: "Finalizar",
-      cancelButtonText: "Cancelar",
-      reverseButtons: true
-    }).then((result) => {
-      if (result.isConfirmed) {
-        validateResults();
-      } else if (
-        result.dismiss === Swal.DismissReason.cancel
-      ) {}
-    });
+    swalWithBootstrapButtons
+      .fire({
+        title: "Você tem certeza?",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonText: "Finalizar",
+        cancelButtonText: "Cancelar",
+        reverseButtons: true,
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          validateResults();
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+        }
+      });
   });
 
-  $(btnRandomize).on('click', function() {
+  $(btnRandomize).on("click", function () {
     handleExercise();
 
-    var targetOffset = $('#headingFour').offset().top;
+    var targetOffset = $("#headingFour").offset().top;
 
-    $('html, body').animate({
-      scrollTop: targetOffset 
-    }, 200); 
+    $("html, body").animate(
+      {
+        scrollTop: targetOffset,
+      },
+      200
+    );
   });
 }
 
-function randomImage(){ 
-  randomIndex = Math.floor(Math.random() * imagePaths.length);  
+function randomImage() {
+  randomIndex = Math.floor(Math.random() * imagePaths.length);
   randomImageType = imagePaths[randomIndex].type;
   randomImageShape = imagePaths[randomIndex].shape;
   randomImagePath = imagePaths[randomIndex].path;
-  img = document.createElement('img');
+  img = document.createElement("img");
   img.src = randomImagePath;
-  img.alt = 'Image';
-  img.classList.add('rounded');
+  img.alt = "Image";
+  img.classList.add("rounded");
 }
 
 function handleExerciseAccordionClose() {
   var accordionBody = document.querySelector(collapseFourAccordionBody);
-  accordionBody.innerHTML = '';
+  accordionBody.innerHTML = "";
 }
 
-function createForm(){
+function createForm() {
   return `
     <div class="container mt-4">
         <div class="d-flex flex-column align-items-start mb-4">
@@ -171,59 +175,119 @@ function createForm(){
             <li><label><b>v</b> = ${poisson}</label></li>
           </ul>
         </div>
-        <div class="mb-3 d-flex align-items-center">
-            <label class="form-label me-3" style="cursor: pointer;" data-toggle="tooltip" data-placement="top" title="σ = F ⁄ A"><b>a)</b> Tensão da estrutura (σ)</label>
-            <div style="width: 120px;">
-                <input type="number" autocomplete="off" class="form-control" id="tensao" style="font-size: smaller;">
+        <div class="mb-3 row text-start">
+          <div class="row">
+            <div class="col-xl-5 col-lg-6 col-md-8 col-sm-12 col-12">
+              <label class="form-label" style="cursor: pointer;" data-toggle="tooltip" data-placement="top" title="σ = F ⁄ A">
+                <b>a)</b> Tensão da estrutura (σ)
+              </label>
             </div>
-            <label class="mx-2">[MPa]</label>
+            <div class="col-xl-3 col-lg-3 col-md-2 col-sm-9 col-9">
+              <input type="number" autocomplete="off" class="form-control" id="tensao" style="font-size: smaller;">
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-2 col-sm-3 col-3">
+              <label class="form-label mx-2">[MPa]</label>
+            </div>
+          </div>
         </div>
-        <div class="mb-3 d-flex align-items-center">
-            <label class="form-label me-3" style="cursor: pointer;" data-toggle="tooltip" data-placement="top" title="S = σe ⁄ σ"><b>b)</b> Coeficiente de Segurança (S)</label>
-            <div style="width: 120px;">
-                <input type="number" autocomplete="off" class="form-control" id="coeficiente" style="font-size: smaller;">
+        <div class="mb-3 row text-start">
+          <div class="row">
+            <div class="col-xl-5 col-lg-6 col-md-8 col-sm-12 col-12">
+              <label class="form-label" style="cursor: pointer;" data-toggle="tooltip" data-placement="top" title="S = σe ⁄ σ">
+                <b>b)</b> Coeficiente de Segurança (S)
+              </label>
             </div>
+            <div class="col-xl-3 col-lg-3 col-md-2 col-sm-9 col-9">
+              <input type="number" autocomplete="off" class="form-control" id="coeficiente" style="font-size: smaller;">
+            </div>
+          </div>
         </div>
-        <div class="mb-3 d-flex align-items-center">
-            <label class="form-label me-3" style="cursor: pointer;" data-toggle="tooltip" data-placement="top" title="εe = 2Ur / σe"><b>c)</b> Deformação na Tensão de escoamento (εe)</label>
-            <div style="width: 120px;">
-                <input type="number" autocomplete="off" class="form-control" id="deformacaoEscoamento" style="font-size: smaller;">
+        <div class="mb-3 row text-start">
+          <div class="row">
+            <div class="col-xl-5 col-lg-6 col-md-8 col-sm-12 col-12">
+              <label class="form-label" style="cursor: pointer;" data-toggle="tooltip" data-placement="top" title="εe = 2Ur / σe">
+                <b>c)</b> Deformação na Tensão de escoamento (εe)
+              </label>
             </div>
+            <div class="col-xl-3 col-lg-3 col-md-2 col-sm-9 col-9">
+              <input type="number" autocomplete="off" class="form-control" id="deformacaoEscoamento" style="font-size: smaller;">
+            </div>
+          </div>
         </div>
-        <div class="mb-3 d-flex align-items-center">
-            <label class="form-label me-3" style="cursor: pointer;" data-toggle="tooltip" data-placement="top" title="E = σe / εe"><b>d)</b> Módulo de Elasticidade (E)</label>
-            <div style="width: 120px;">
-                <input type="number" autocomplete="off" class="form-control" id="moduloElasticidade" style="font-size: smaller;">
+        <div class="mb-3 row text-start">
+          <div class="row">
+            <div class="col-xl-5 col-lg-6 col-md-8 col-sm-12 col-12">
+              <label class="form-label" style="cursor: pointer;" data-toggle="tooltip" data-placement="top" title="E = σe / εe">
+                <b>d)</b> Módulo de Elasticidade (E)
+              </label>
             </div>
-            <label class="mx-2">[GPa]</label>
+            <div class="col-xl-3 col-lg-3 col-md-2 col-sm-9 col-9">
+              <input type="number" autocomplete="off" class="form-control" id="moduloElasticidade" style="font-size: smaller;">
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-2 col-sm-3 col-3">
+              <label class="form-label mx-2">[GPa]</label>
+            </div>
+          </div>
         </div>
-        <div class="mb-3 d-flex align-items-center">
-            <label class="form-label me-3" style="cursor: pointer;" data-toggle="tooltip" data-placement="top" title="ε = σ / E"><b>e)</b> Deformação Longitudinal (ε)</label>
-            <div style="width: 120px;">
-                <input type="number" autocomplete="off" class="form-control" id="deformacaoLongitudinal" style="font-size: smaller;">
+        <div class="mb-3 row text-start">
+          <div class="row">
+            <div class="col-xl-5 col-lg-6 col-md-8 col-sm-12 col-12">
+              <label class="form-label" style="cursor: pointer;" data-toggle="tooltip" data-placement="top" title="ε = σ / E">
+                <b>e)</b> Deformação Longitudinal (ε)
+              </label>
             </div>
-            <label class="mx-2">[mm/mm]</label>
+            <div class="col-xl-3 col-lg-3 col-md-2 col-sm-9 col-9">
+              <input type="number" autocomplete="off" class="form-control" id="deformacaoLongitudinal" style="font-size: smaller;">
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-2 col-sm-3 col-3">
+              <label class="form-label mx-2">[mm/mm]</label>
+            </div>
+          </div>
         </div>
-        <div class="mb-3 d-flex align-items-center">
-            <label class="form-label me-3" style="cursor: pointer;" data-toggle="tooltip" data-placement="top" title="εt = - v . ε"><b>f)</b> Deformação Transversal (εt)</label>
-            <div style="width: 120px;">
-                <input type="number" autocomplete="off" class="form-control" id="deformacaoTransversal" style="font-size: smaller;">
+        <div class="mb-3 row text-start">
+          <div class="row">
+            <div class="col-xl-5 col-lg-6 col-md-8 col-sm-12 col-12">
+              <label class="form-label" style="cursor: pointer;" data-toggle="tooltip" data-placement="top" title="εt = - v . ε">
+                <b>f)</b> Deformação Transversal (εt)
+              </label>
             </div>
-            <label class="mx-2">[mm/mm]</label>
+            <div class="col-xl-3 col-lg-3 col-md-2 col-sm-9 col-9">
+              <input type="number" autocomplete="off" class="form-control" id="deformacaoTransversal" style="font-size: smaller;">
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-2 col-sm-3 col-3">
+              <label class="form-label mx-2">[mm/mm]</label>
+            </div>
+          </div>
         </div>
-        <div class="mb-3 d-flex align-items-center">
-            <label class="form-label me-3" style="cursor: pointer;" data-toggle="tooltip" data-placement="top" title="Δl = ε . l0"><b>g)</b> Variação de Comprimento (Δl)</label>
-            <div style="width: 120px;">
-                <input type="number" autocomplete="off" class="form-control" id="variacaoComprimento" style="font-size: smaller;">
+        <div class="mb-3 row text-start">
+          <div class="row">
+            <div class="col-xl-5 col-lg-6 col-md-8 col-sm-12 col-12">
+              <label class="form-label" style="cursor: pointer;" data-toggle="tooltip" data-placement="top" title="Δl = ε . l0">
+                <b>g)</b> Variação de Comprimento (Δl)
+              </label>
             </div>
-            <label class="mx-2">[mm]</label>
+            <div class="col-xl-3 col-lg-3 col-md-2 col-sm-9 col-9">
+              <input type="number" autocomplete="off" class="form-control" id="variacaoComprimento" style="font-size: smaller;">
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-2 col-sm-3 col-3">
+              <label class="form-label mx-2">[mm]</label>
+            </div>
+          </div>
         </div>
-        <div class="mb-5 d-flex align-items-center">
-            <label class="form-label me-3" style="cursor: pointer;" data-toggle="tooltip" data-placement="top" title="wΔ = εt . w0"><b>h)</b> Variação de Largura (Δw)</label>
-            <div style="width: 120px;">
-                <input type="number" autocomplete="off" class="form-control" id="variacaoLargura" style="font-size: smaller;">
+        <div class="mb-5 row text-start">
+          <div class="row">
+            <div class="col-xl-5 col-lg-6 col-md-8 col-sm-12 col-12">
+              <label class="form-label" style="cursor: pointer;" data-toggle="tooltip" data-placement="top" title="wΔ = εt . w0">
+                <b>h)</b> Variação de Largura (Δw)
+              </label>
             </div>
-            <label class="mx-2">[mm]</label>
+            <div class="col-xl-3 col-lg-3 col-md-2 col-sm-9 col-9">
+              <input type="number" autocomplete="off" class="form-control" id="variacaoLargura" style="font-size: smaller;">
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-2 col-sm-3 col-3">
+              <label class="form-label mx-2">[mm]</label>
+            </div>
+          </div>
         </div>
         <hr>
         <div class="d-flex justify-content-end mt-3">
@@ -238,7 +302,7 @@ function createForm(){
     </div>`;
 }
 
-function createCase(){
+function createCase() {
   valueA = generateValue(40, 90);
   valueB = generateValue(150, 200);
   valueC = generateValue(100000, 200000);
@@ -248,54 +312,56 @@ function createCase(){
   poisson = 0.33;
 }
 
-function generateValue(min, max){
+function generateValue(min, max) {
   var randomValue = Math.random();
   var scaledValue = randomValue * (max - min) + min;
   var roundedValue = Math.round(scaledValue);
   return roundedValue;
 }
 
-function calculateArea(){
-  return randomImageShape == _circle ? (Math.PI * Math.pow((valueA/2), 2)) : Math.pow(valueA, 2);
+function calculateArea() {
+  return randomImageShape == _circle
+    ? Math.PI * Math.pow(valueA / 2, 2)
+    : Math.pow(valueA, 2);
 }
 
-function calculateTraction(){
+function calculateTraction() {
   return (valueC / area).toFixed(3);
 }
 
-function calculateSignal(){
-  return ((randomImageType == _compression) ? -1 : 1);
+function calculateSignal() {
+  return randomImageType == _compression ? -1 : 1;
 }
 
-function calculateSafetyFactor(){
+function calculateSafetyFactor() {
   return (tractionFlow / traction).toFixed(2);
 }
 
-function calculateFlowDeformation(){
-  return ((((2 * resilience) / tractionFlow).toFixed(5)));
+function calculateFlowDeformation() {
+  return ((2 * resilience) / tractionFlow).toFixed(5);
 }
 
-function calculateElasticModulus(){
-  return ((Math.abs(tractionFlow) / Math.abs(flowDeformation))/1000).toFixed(3);
+function calculateElasticModulus() {
+  return (Math.abs(tractionFlow) / Math.abs(flowDeformation) / 1000).toFixed(3);
 }
 
-function calculateLongitudinalDeformation(){
-  return (((traction / elasticModulus) / 1000).toFixed(5) * signal);  
+function calculateLongitudinalDeformation() {
+  return (traction / elasticModulus / 1000).toFixed(5) * signal;
 }
 
 function calculateTransverseDeformation() {
-  return ((longitudinalDeformation * poisson) * (-1)).toFixed(5);
+  return (longitudinalDeformation * poisson * -1).toFixed(5);
 }
 
 function calculateLengthVariation() {
-  return (traction * valueB * signal / elasticModulus / 1000).toFixed(3);
+  return ((traction * valueB * signal) / elasticModulus / 1000).toFixed(3);
 }
 
 function calculateWidthVariation() {
   return (transverseDeformation * valueA).toFixed(5);
 }
 
-function createResults(){
+function createResults() {
   safetyFactor = calculateSafetyFactor();
   signal = calculateSignal();
   area = calculateArea();
@@ -315,20 +381,20 @@ function showMessage() {
   var alertIcon;
   var alertTitle;
 
-  switch (percentage){
+  switch (percentage) {
     case 0:
-      alertIcon = 'error';
-      alertTitle = 'Estude um pouco mais';
+      alertIcon = "error";
+      alertTitle = "Estude um pouco mais";
       break;
 
     case 100:
-      alertIcon = 'success';
-      alertTitle = 'Parabéns!';
+      alertIcon = "success";
+      alertTitle = "Parabéns!";
       break;
 
     default:
-      alertIcon = 'warning';
-      alertTitle = 'Você está indo bem';
+      alertIcon = "warning";
+      alertTitle = "Você está indo bem";
       break;
   }
 
@@ -337,9 +403,9 @@ function showMessage() {
     text: `Porcentagem de acertos: ${percentage.toFixed(2)}%`,
     icon: alertIcon,
     customClass: {
-      title: 'text-center',
-      htmlContainer: 'text-center'
-    }
+      title: "text-center",
+      htmlContainer: "text-center",
+    },
   });
 
   totalResultsCount = 0;
@@ -348,33 +414,49 @@ function showMessage() {
 
 function validateInput(input, expectedValue) {
   const value = parseFloat($(input).val());
-  const margin = 0.15;  
+  const margin = 0.15;
   const absExpectedValue = Math.abs(expectedValue);
-  const minValue = expectedValue >= 0 ? expectedValue - absExpectedValue * margin : expectedValue + absExpectedValue * margin;
-  const maxValue = expectedValue >= 0 ? expectedValue + absExpectedValue * margin : expectedValue - absExpectedValue * margin;
+  const minValue =
+    expectedValue >= 0
+      ? expectedValue - absExpectedValue * margin
+      : expectedValue + absExpectedValue * margin;
+  const maxValue =
+    expectedValue >= 0
+      ? expectedValue + absExpectedValue * margin
+      : expectedValue - absExpectedValue * margin;
 
   totalResultsCount++;
-  if (!isNaN(value) && ((value >= minValue && value <= maxValue) || (value <= minValue && value >= maxValue))) {
-      $(input).removeClass('is-invalid').addClass('is-valid');
-      validResultsCount++;
+  if (
+    !isNaN(value) &&
+    ((value >= minValue && value <= maxValue) ||
+      (value <= minValue && value >= maxValue))
+  ) {
+    $(input).removeClass("is-invalid").addClass("is-valid");
+    validResultsCount++;
   } else {
-      $(input).removeClass('is-valid').addClass('is-invalid');
+    $(input).removeClass("is-valid").addClass("is-invalid");
   }
 }
 
 function validateResults() {
   const inputs = [
-    { id: '#tensao', expectedValue: parseFloat(traction) },
-    { id: '#coeficiente', expectedValue: parseFloat(safetyFactor) },
-    { id: '#deformacaoEscoamento', expectedValue: parseFloat(flowDeformation) },
-    { id: '#moduloElasticidade', expectedValue: parseFloat(elasticModulus) },
-    { id: '#deformacaoLongitudinal', expectedValue: parseFloat(longitudinalDeformation) },
-    { id: '#deformacaoTransversal', expectedValue: parseFloat(transverseDeformation) },
-    { id: '#variacaoComprimento', expectedValue: parseFloat(lengthVariation) },
-    { id: '#variacaoLargura', expectedValue: parseFloat(widthVariation) }
+    { id: "#tensao", expectedValue: parseFloat(traction) },
+    { id: "#coeficiente", expectedValue: parseFloat(safetyFactor) },
+    { id: "#deformacaoEscoamento", expectedValue: parseFloat(flowDeformation) },
+    { id: "#moduloElasticidade", expectedValue: parseFloat(elasticModulus) },
+    {
+      id: "#deformacaoLongitudinal",
+      expectedValue: parseFloat(longitudinalDeformation),
+    },
+    {
+      id: "#deformacaoTransversal",
+      expectedValue: parseFloat(transverseDeformation),
+    },
+    { id: "#variacaoComprimento", expectedValue: parseFloat(lengthVariation) },
+    { id: "#variacaoLargura", expectedValue: parseFloat(widthVariation) },
   ];
 
-  inputs.forEach(input => {
+  inputs.forEach((input) => {
     validateInput(input.id, input.expectedValue);
   });
 
@@ -382,12 +464,12 @@ function validateResults() {
 }
 
 function showRightAnswers() {
-  $('#tensao').val(traction);
-  $('#coeficiente').val(safetyFactor);
-  $('#deformacaoEscoamento').val(flowDeformation);
-  $('#moduloElasticidade').val(elasticModulus);
-  $('#deformacaoLongitudinal').val(longitudinalDeformation);
-  $('#deformacaoTransversal').val(transverseDeformation);
-  $('#variacaoComprimento').val(lengthVariation);
-  $('#variacaoLargura').val(widthVariation);
+  $("#tensao").val(traction);
+  $("#coeficiente").val(safetyFactor);
+  $("#deformacaoEscoamento").val(flowDeformation);
+  $("#moduloElasticidade").val(elasticModulus);
+  $("#deformacaoLongitudinal").val(longitudinalDeformation);
+  $("#deformacaoTransversal").val(transverseDeformation);
+  $("#variacaoComprimento").val(lengthVariation);
+  $("#variacaoLargura").val(widthVariation);
 }
