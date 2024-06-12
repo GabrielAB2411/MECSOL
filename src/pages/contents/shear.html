@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../../css/common.css" rel="stylesheet" />
-    <link href="../../lib/bootstrap/css/bootstrap.css" rel="stylesheet" />
-    <link href="../../lib/font-awesome/css/all.css" rel="stylesheet" />
-    <link href="../../lib/animateCSS/animate.css" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../../css/common.css" rel="stylesheet"/>
+  <link href="../../lib/bootstrap/css/bootstrap.css" rel="stylesheet"/>
+  <link href="../../lib/font-awesome/css/all.css" rel="stylesheet"/>
+  <link href="../../lib/animateCSS/animate.css" rel="stylesheet"/>
+  <link id="sweetalert-theme" rel="stylesheet" href="">
     <title>Cisalhamento</title>
 </head>
 
 <script src="../../lib/popper.js/umd/popper.js"></script>
 <script src="../../lib/bootstrap/js/bootstrap.js"></script>
 <script src="../../lib/jquery/jquery.js"></script>
+<script src="../../lib/sweetalert2/sweetalert2.js"></script>
 <script src="../../js/themeSwitcher.js"></script>
+<script src="../../js/shear.js"></script>
 
 <body data-bs-theme="light">
     <nav class="navbar navbar-expand-lg py-3 sticky-top navbar-light">
@@ -31,31 +34,80 @@
             <p class="animate__animated animate__fadeIn animate__delay-1s mb-5">Comportamento mecânico dos materiais aplicado ao cisalhamento</p>
             <div class="justify-content-center">
                 <div class="animate__animated animate__zoomIn accordion" id="accordionShear">
-                    <div class="accordion-item">
-                      <h2 class="accordion-header" id="headingOne">
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="" aria-controls="collapseOne">
                             Cálculo da tensão de cisalhamento
                         </button>
-                      </h2>
-                      <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionShear">
-                        <div class="accordion-body">
-                          <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionShear">
+                        <div class="accordion-body" style="text-align: justify;">
+                            <h3 class="text-center"><b>Cálculo da tensão de cisalhamento</b></h3>
+                            <p>&nbsp; A tensão de cisalhamento é uma medida da força de corte por unidade de área em um material. Ela é calculada dividindo-se a força de cisalhamento pela área da seção transversal.</p>
+                            <p>&nbsp; Na prática, a tensão de cisalhamento pode ser calculada utilizando-se a seguinte equação:</p>
+                            <h4 class="text-center"><b>&tau; = <sup>F</sup>&frasl;<sub>A</sub></b></h4>
+                            <p>&nbsp; Onde:</p>
+                            <ul>
+                                <li>&tau; é a tensão de cisalhamento (em Pascal)</li>
+                                <li>F é a força de cisalhamento (em Newton)</li>
+                                <li>A é a área da seção transversal (em metros quadrados)</li>
+                            </ul>
+                            <p>&nbsp; O cálculo da tensão de cisalhamento é fundamental em diversas aplicações, como na análise de vigas, no projeto de estruturas metálicas e na determinação da capacidade de corte de materiais.</p>
+                            <p>&nbsp; É importante ressaltar que a tensão de cisalhamento pode levar à deformação plástica do material se exceder os limites de resistência, portanto, deve-se considerar os limites de escoamento ao projetar componentes sujeitos a esse tipo de carga.</p>
                         </div>
-                      </div>
                     </div>
-                    <div class="accordion-item">
-                      <h2 class="accordion-header" id="headingTwo">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            Cálculo de estampagem de peças
-                        </button>
-                      </h2>
-                      <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionShear">
-                        <div class="accordion-body">
-                          <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                        </div>
+                </div>
+                
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingTwo">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                          Cálculo de estampagem de peças
+                      </button>
+                  </h2>
+                  <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionShear">
+                      <div class="accordion-body" style="text-align: justify;">
+                          <h3 class="text-center"><b>Cálculo de estampagem de peças</b></h3>
+                          <p>&nbsp; A estampagem de peças é um processo de fabricação utilizado para dar forma a chapas metálicas por meio de corte, dobra e outras operações. O cálculo da estampagem de peças envolve considerações sobre a resistência do material, as forças envolvidas e o projeto do ferramental.</p>
+                          <p>&nbsp; Uma das principais considerações no cálculo de estampagem de peças é a determinação das tensões atuantes durante o processo. Isso inclui a tensão de cisalhamento nos pontos de corte e dobra, bem como a tensão de tração em regiões esticadas da chapa.</p>
+                          <p>&nbsp; Além disso, é importante considerar a geometria da peça, as tolerâncias dimensionais e os requisitos de acabamento superficial ao calcular a estampagem de peças.</p>
+                          <p>&nbsp; Durante o processo de estampagem, a chapa metálica é submetida a altas tensões e deformações, o que pode levar à ocorrência de defeitos como enrugamento, rugas e distorção dimensional. Portanto, o projeto adequado do ferramental e a seleção correta do material são essenciais para garantir a qualidade das peças estampadas.</p>
+                          <p>&nbsp; O processo de estampagem de peças é amplamente utilizado na indústria automotiva, aeroespacial, de eletrodomésticos e em outras áreas que requerem produção em massa de componentes metálicos.</p>
+                          <p>&nbsp; Ao calcular a tensão de cisalhamento em materiais ducteis <b>(critério de von Mises)</b>, utiliza-se a seguinte fórmula:</p>
+                          <h4 class="text-center"><b>τ<sub>LRT</sub> = σ / √3</b></h4>
+                          <p>&nbsp; E em materiais frágeis <b>(critério de Tresca)</b>, a fórmula é:</p>
+                          <h4 class="text-center"><b>τ<sub>LRT</sub> = σ / 2</b></h4>
+                          <p>&nbsp; Onde:</p>
+                          <ul>
+                              <li>τ<sub>LRT</sub> é a tensão de cisalhamento (em Pascal) no Limite de Resistência Teórico</li>
+                              <li>σ é a tensão principal (em Pascal)</li>
+                          </ul>
+                          <h4 class="text-center"><b>Fórmula da Tensão de Cisalhamento:</b></h4>
+                          <p>&nbsp; A fórmula da tensão de cisalhamento é representada por τ e é calculada pela divisão da força de cisalhamento (F) pela área da seção transversal (A).</p>
+                          <h4 class="text-center"><b>τ = F / A</b></h4>
+                          <p>&nbsp; Onde:</p>
+                          <ul>
+                              <li>τ é a tensão de cisalhamento (em Pascal)</li>
+                              <li>F é a força de cisalhamento (em Newton)</li>
+                              <li>A é a área da seção transversal (em metros quadrados)</li>
+                          </ul>
                       </div>
+                  </div>
+              </div>
+                
+                <div class="accordion-item" style="margin-bottom: 120px;">
+                  <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button collapsed" disabled type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                      <i class="fa-solid fa-calculator"></i> &nbsp;  
+                      Exercício <b>(em desenvolvimento)</b>
+                    </button>
+                  </h2>
+                  <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionShear">
+                    <div class="accordion-body"> 
+                      Favor aguardar, os devs estão trabalhando
                     </div>
                   </div>
+                </div>
+
             </div>
         </div>
     </div>
