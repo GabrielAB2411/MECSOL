@@ -37,6 +37,11 @@ $(document).ready(function () {
     $("[data-bs-theme]").each(function () {
       $(this).attr("data-bs-theme", theme);
     });
+
+    if (theme === 'dark') 
+      $('.navbar').css('background-color', '#242933');
+    else 
+      $('.navbar').css('background-color', '#ffffff');
   }
 
   var cookieTheme = getCookie("CurrentTheme");
@@ -87,6 +92,11 @@ $(document).ready(function () {
         .addClass("fa-regular fa-sun");
     }
   });
+
+  if (currentTheme === 'dark') 
+    $('.navbar').css('background-color', '#242933');
+  else 
+    $('.navbar').css('background-color', '#ffffff');
 
   $("[data-bs-theme]").each(function () {
     $(this).attr("data-bs-theme", currentTheme);

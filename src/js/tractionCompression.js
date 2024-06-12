@@ -82,6 +82,8 @@ $(document).ready(function () {
       tooltip.hide();
     });
   });
+
+  $('#lblCurrentYear').text(`© ${new Date().getFullYear().toString()}`);
 });
 
 function handleExercise() {
@@ -104,7 +106,27 @@ function handleExercise() {
   });
 
   $(btnVerify).on('click', function() {
-    validateResults();
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-outline-success mx-2",
+        cancelButton: "btn btn-outline-danger"
+      },
+      buttonsStyling: false
+    });
+    swalWithBootstrapButtons.fire({
+      title: "Você tem certeza?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Finalizar",
+      cancelButtonText: "Cancelar",
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        validateResults();
+      } else if (
+        result.dismiss === Swal.DismissReason.cancel
+      ) {}
+    });
   });
 
   $(btnRandomize).on('click', function() {
@@ -118,7 +140,7 @@ function handleExercise() {
   });
 }
 
-function randomImage(){
+function randomImage(){ 
   randomIndex = Math.floor(Math.random() * imagePaths.length);  
   randomImageType = imagePaths[randomIndex].type;
   randomImageShape = imagePaths[randomIndex].shape;
@@ -139,10 +161,10 @@ function createForm(){
     <div class="container mt-4">
         <div class="d-flex flex-column align-items-start mb-4">
           <h4 class="mb-3"><b>Calcule o que se pede com base nos dados abaixo:</b></h4>
-          <ul>
+          <ul class="text-start">
             <li><label><b>[A]</b> = ${valueA} mm</label></li>
             <li><label><b>[B]</b> = ${valueB} mm</label></li>
-            <li><label><b>[C]</b> = ${valueC} N</label></li>
+            <li><label><b>[C]</b> = ${valueC / 1000} kN</label></li>
             <li><div><b>&sigma;<sub>&epsilon;</sub> = </b> ${tractionFlow} MPa</div></li>
             <li><div><b>&sigma;<sub>LRT</sub> = </b> ${tractionLimit} MPa</div></li>
             <li><label><b>Ur</b> = ${resilience} MJ/M³</label></li>
@@ -152,54 +174,54 @@ function createForm(){
         <div class="mb-3 d-flex align-items-center">
             <label class="form-label me-3" style="cursor: pointer;" data-toggle="tooltip" data-placement="top" title="σ = F ⁄ A"><b>a)</b> Tensão da estrutura (σ)</label>
             <div style="width: 120px;">
-                <input type="number" class="form-control" id="tensao" style="font-size: smaller;">
+                <input type="number" autocomplete="off" class="form-control" id="tensao" style="font-size: smaller;">
             </div>
             <label class="mx-2">[MPa]</label>
         </div>
         <div class="mb-3 d-flex align-items-center">
             <label class="form-label me-3" style="cursor: pointer;" data-toggle="tooltip" data-placement="top" title="S = σe ⁄ σ"><b>b)</b> Coeficiente de Segurança (S)</label>
             <div style="width: 120px;">
-                <input type="number" class="form-control" id="coeficiente" style="font-size: smaller;">
+                <input type="number" autocomplete="off" class="form-control" id="coeficiente" style="font-size: smaller;">
             </div>
         </div>
         <div class="mb-3 d-flex align-items-center">
             <label class="form-label me-3" style="cursor: pointer;" data-toggle="tooltip" data-placement="top" title="εe = 2Ur / σe"><b>c)</b> Deformação na Tensão de escoamento (εe)</label>
             <div style="width: 120px;">
-                <input type="number" class="form-control" id="deformacaoEscoamento" style="font-size: smaller;">
+                <input type="number" autocomplete="off" class="form-control" id="deformacaoEscoamento" style="font-size: smaller;">
             </div>
         </div>
         <div class="mb-3 d-flex align-items-center">
             <label class="form-label me-3" style="cursor: pointer;" data-toggle="tooltip" data-placement="top" title="E = σe / εe"><b>d)</b> Módulo de Elasticidade (E)</label>
             <div style="width: 120px;">
-                <input type="number" class="form-control" id="moduloElasticidade" style="font-size: smaller;">
+                <input type="number" autocomplete="off" class="form-control" id="moduloElasticidade" style="font-size: smaller;">
             </div>
             <label class="mx-2">[GPa]</label>
         </div>
         <div class="mb-3 d-flex align-items-center">
             <label class="form-label me-3" style="cursor: pointer;" data-toggle="tooltip" data-placement="top" title="ε = σ / E"><b>e)</b> Deformação Longitudinal (ε)</label>
             <div style="width: 120px;">
-                <input type="number" class="form-control" id="deformacaoLongitudinal" style="font-size: smaller;">
+                <input type="number" autocomplete="off" class="form-control" id="deformacaoLongitudinal" style="font-size: smaller;">
             </div>
             <label class="mx-2">[mm/mm]</label>
         </div>
         <div class="mb-3 d-flex align-items-center">
             <label class="form-label me-3" style="cursor: pointer;" data-toggle="tooltip" data-placement="top" title="εt = - v . ε"><b>f)</b> Deformação Transversal (εt)</label>
             <div style="width: 120px;">
-                <input type="number" class="form-control" id="deformacaoTransversal" style="font-size: smaller;">
+                <input type="number" autocomplete="off" class="form-control" id="deformacaoTransversal" style="font-size: smaller;">
             </div>
             <label class="mx-2">[mm/mm]</label>
         </div>
         <div class="mb-3 d-flex align-items-center">
             <label class="form-label me-3" style="cursor: pointer;" data-toggle="tooltip" data-placement="top" title="Δl = ε . l0"><b>g)</b> Variação de Comprimento (Δl)</label>
             <div style="width: 120px;">
-                <input type="number" class="form-control" id="variacaoComprimento" style="font-size: smaller;">
+                <input type="number" autocomplete="off" class="form-control" id="variacaoComprimento" style="font-size: smaller;">
             </div>
             <label class="mx-2">[mm]</label>
         </div>
         <div class="mb-5 d-flex align-items-center">
             <label class="form-label me-3" style="cursor: pointer;" data-toggle="tooltip" data-placement="top" title="wΔ = εt . w0"><b>h)</b> Variação de Largura (Δw)</label>
             <div style="width: 120px;">
-                <input type="number" class="form-control" id="variacaoLargura" style="font-size: smaller;">
+                <input type="number" autocomplete="off" class="form-control" id="variacaoLargura" style="font-size: smaller;">
             </div>
             <label class="mx-2">[mm]</label>
         </div>
