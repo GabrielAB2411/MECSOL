@@ -1,33 +1,33 @@
-# ⚙️ MECSOL - Mecânica dos Sólidos
+# ⚙️ MECSOL - Solid Mechanics
 
-## 📌 Sobre o Projeto
+## 📌 About the Project
 
-O **MECSOL** é uma plataforma educacional desenvolvida para auxiliar alunos e professores no aprendizado dos fundamentos da **Mecânica dos Sólidos**.  
+**MECSOL** is an educational platform developed to assist students and professors in learning the fundamentals of **Solid Mechanics**.
 
-O sistema disponibiliza conteúdos teóricos e exercícios práticos, facilitando a compreensão de conceitos essenciais da disciplina, amplamente presente em cursos de engenharia.
-
----
-
-## 🚀 Funcionalidades
-
-### 📚 Conteúdo Teórico
-Acesse materiais explicativos sobre temas fundamentais, como:
-
-- Tensão e deformação  
-- Leis constitutivas  
-- Esforços internos  
-- Análise estrutural  
-- Propriedades mecânicas dos materiais  
-
-### 📝 Exercícios Práticos
-Resolva exercícios para fixação dos conteúdos estudados e aplicação prática dos conceitos.
-
-### 🌐 Plataforma Online
-O projeto está hospedado no **GitHub Pages**, permitindo acesso rápido e fácil diretamente pelo navegador.
+The system provides theoretical content and practical exercises, making it easier to understand essential concepts of the subject, widely studied in engineering courses.
 
 ---
 
-## 💻 Tecnologias Utilizadas
+## 🚀 Features
+
+### 📚 Theoretical Content
+Access explanatory materials on fundamental topics such as:
+
+- Stress and strain  
+- Constitutive laws  
+- Internal forces  
+- Structural analysis  
+- Mechanical properties of materials  
+
+### 📝 Practical Exercises
+Solve exercises to reinforce learning and apply theoretical concepts in practice.
+
+### 🌐 Online Platform
+The project is hosted on **GitHub Pages**, allowing quick and easy access directly through the browser.
+
+---
+
+## 💻 Technologies Used
 
 - HTML5  
 - CSS3  
@@ -35,24 +35,23 @@ O projeto está hospedado no **GitHub Pages**, permitindo acesso rápido e fáci
 
 ---
 
-## ▶️ Como Utilizar
+## ▶️ How to Use
 
-1. Acesse a plataforma:  
+1. Access the platform:  
 🔗 **[MECSOL](https://gabrielab2411.github.io/MECSOL/)**
 
-2. Navegue entre as seções disponíveis.
+2. Navigate through the available sections.
 
-3. Estude os conteúdos teóricos e pratique com os exercícios propostos.
+3. Study the theoretical content and practice with the proposed exercises.
 
 ---
 
-## 👨‍💻 Autores
+## 👨‍💻 Authors
 
 - Gabriel Barbosa  
 - Gustavo Braz  
 
 ---
+## 📄 License
 
-## 📄 Licença
-
-Este projeto é destinado a fins educacionais.
+This project is intended for educational purposes.
