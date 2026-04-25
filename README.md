@@ -1,28 +1,58 @@
-#  :gear: MECSOL - Mecânica dos Sólidos
+# ⚙️ MECSOL - Mecânica dos Sólidos
 
-## :pushpin: Descrição
+## 📌 Sobre o Projeto
 
-O MECSOL é um software desenvolvido para auxiliar alunos e professores na compreensão e estudo dos fundamentos da Mecânica dos Sólidos. Este software oferece uma plataforma online para acesso a conceitos teóricos e exercícios práticos relacionados à disciplina de Mecânica dos Sólidos, frequentemente estudada em cursos de engenharia.
+O **MECSOL** é uma plataforma educacional desenvolvida para auxiliar alunos e professores no aprendizado dos fundamentos da **Mecânica dos Sólidos**.  
 
-## :hammer_and_wrench: Funcionalidades
+O sistema disponibiliza conteúdos teóricos e exercícios práticos, facilitando a compreensão de conceitos essenciais da disciplina, amplamente presente em cursos de engenharia.
 
-- **Conteúdo Teórico**: Explore conceitos fundamentais da Mecânica dos Sólidos, incluindo tensão, deformação, leis constitutivas e análise de estruturas.
-  
-- **Exercícios Práticos**: Acesse uma variedade de exercícios para praticar e aplicar os conhecimentos teóricos adquiridos.
+---
 
-- **Hospedagem Simples**: O software é hospedado na plataforma GitHub, utilizando apenas HTML, CSS e JavaScript, garantindo facilidade de acesso e manutenção.
+## 🚀 Funcionalidades
 
-## :desktop_computer: Como Usar
+### 📚 Conteúdo Teórico
+Acesse materiais explicativos sobre temas fundamentais, como:
 
-1. Acesse o site :link: [MECSOL](https://gabrielab2411.github.io/MECSOL/) para começar a explorar o conteúdo teórico e os exercícios práticos.
-  
-2. Navegue pelas seções para encontrar informações sobre os fundamentos da Mecânica dos Sólidos e pratique seus conhecimentos com os exercícios disponíveis.
+- Tensão e deformação  
+- Leis constitutivas  
+- Esforços internos  
+- Análise estrutural  
+- Propriedades mecânicas dos materiais  
 
-## :sos: Contribuições
+### 📝 Exercícios Práticos
+Resolva exercícios para fixação dos conteúdos estudados e aplicação prática dos conceitos.
 
-- Contribuições são bem-vindas! Sinta-se à vontade para enviar sugestões, correções ou melhorias através de pull requests.
+### 🌐 Plataforma Online
+O projeto está hospedado no **GitHub Pages**, permitindo acesso rápido e fácil diretamente pelo navegador.
 
-## :man_technologist: Autores
+---
 
-- Gabriel Barbosa.
-- Gustavo Braz.
+## 💻 Tecnologias Utilizadas
+
+- HTML5  
+- CSS3  
+- JavaScript  
+
+---
+
+## ▶️ Como Utilizar
+
+1. Acesse a plataforma:  
+🔗 **[MECSOL](https://gabrielab2411.github.io/MECSOL/)**
+
+2. Navegue entre as seções disponíveis.
+
+3. Estude os conteúdos teóricos e pratique com os exercícios propostos.
+
+---
+
+## 👨‍💻 Autores
+
+- Gabriel Barbosa  
+- Gustavo Braz  
+
+---
+
+## 📄 Licença
+
+Este projeto é destinado a fins educacionais.
